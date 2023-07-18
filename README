@@ -1,0 +1,29 @@
+statistic
+=========
+
+This project contains my statistic exam prep. I go into depth on topics i
+require for passing the class. I tried to comment every non trivial line in the
+latex source and provide examples for theoretic chapters.
+
+Tips for writing latex with vim:
+
+    * use neovim
+    * use vimtex
+    * use coc-vimtex
+    * use treesitter
+    * open zathura or okular pointed to the output pdf on the side, both will
+      reload on change
+
+Required Tools and libraries:
+
+    * make
+    * texlive
+    * pdflatex
+    * pgfplots
+    * amsmath
+    * amssymb
+
+Produce the pdf file:
+
+    make
+
