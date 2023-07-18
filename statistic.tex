@@ -1,0 +1,60 @@
+%% ------------------------------------------- %%
+%% me learning statistics for my exam as well  %%
+%% as documenting everything used in this      %%
+%% document in detail                          %%
+%% ------------------------------------------- %%
+
+%% -----------------preamble------------------ %%
+%% define the document as an article,
+%% size of a4paper, twosided and with two columns
+\documentclass[twoside, a4paper, twocolumn]{article}
+%% use the utf-8 encoding for the input
+\usepackage[utf8]{inputenc}
+%% diagrams
+\usepackage{pgfplots}
+%% cache diagrams -> faster compile times
+\usepgfplotslibrary{external}
+\tikzexternalize
+%% math 
+\usepackage{amsmath}
+\usepackage{amssymb}
+%% ------------------------------------------- %%
+
+\begin{document}
+    \section*{Statistics - Exam preparation}
+    by \textit{xnacly}
+    \paragraph{Introduction}
+    Statistics is a fairly big field. Therefore this paper will only include
+    the absolutely necessary topics for passing the university class.
+
+    \paragraph{Abstract}
+    This paper starts of with symbols used in the field of statistics, their
+    meaning and in what context they are commonly used. 
+    %% TODO: do this
+
+    \paragraph{Symbols, functions and special characters}
+
+    %% TODO: übersetzen
+    \begin{itemize}
+       \item $n!$  Faculty 
+       \item $\binom{n}{k}$  Binomial Coefficient 
+       \item $\Omega$  Ergebnismenge 
+       \item $\omega$  Ergebnis 
+       \item $A \subseteq \Omega$  Ereignis 
+       \item $\{\omega\}$  Elementarerignis 
+       \item $\mathbb{P}$  Wahrscheinlichkeitsmaß 
+       \item $\mathbb{P}(A)$  Wahrscheinlichkeit eines Ereignisses 
+       \item $\mathbb{E}(X), \mu_x, \mu$  Erwartungswert 
+       \item $\sigma$  Standardabweichung 
+       \item $\mathrm{Var}(X), \sigma^2_x$  Varianz 
+       \item $\mathrm{Cov}(X,Y), \sigma_{XY}$  Kovarianz von X und Y 
+       \item $\Sigma$  Kovarianz-Matrix 
+       \item $\mathcal{N}(\mu, \sigma^2)$  Normalverteilung
+       \item $\varphi$  Glockenkurve 
+       \item $\Phi$  Fehlerintegral
+       \item $\mathrm{Z}$  standard-normalverteilte Zufallsvariable
+       \item $\textrm{Bin}(n, p)$  Binomialverteilung
+       \item $\textrm{Pois}(\lambda)$  Poission-Verteilung
+       \item $\textrm{Exp}(\lambda)$  Exponentialverteilung
+    \end{itemize}
+\end{document}
