@@ -6,6 +6,7 @@ require for passing the class. I tried to comment every non trivial line in the
 latex source and provide examples for theoretic chapters.
 
 Tips for writing latex with vim:
+--------------------------------
 
     * use neovim
     * use vimtex
@@ -15,6 +16,7 @@ Tips for writing latex with vim:
       reload on change
 
 Required Tools and libraries:
+-----------------------------
 
     * make
     * texlive
@@ -24,6 +26,7 @@ Required Tools and libraries:
     * amssymb
 
 Produce the pdf file:
+---------------------
 
     make
 
