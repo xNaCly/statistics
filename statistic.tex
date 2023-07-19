@@ -1,60 +1,145 @@
-%% ------------------------------------------- %%
-%% me learning statistics for my exam as well  %%
-%% as documenting everything used in this      %%
-%% document in detail                          %%
-%% ------------------------------------------- %%
-
 %% -----------------preamble------------------ %%
+
 %% define the document as an article,
 %% size of a4paper, twosided and with two columns
 \documentclass[twoside, a4paper, twocolumn]{article}
+
 %% use the utf-8 encoding for the input
 \usepackage[utf8]{inputenc}
+
 %% diagrams
 \usepackage{pgfplots}
+
 %% cache diagrams -> faster compile times
 \usepgfplotslibrary{external}
 \tikzexternalize
-%% math 
+
+%% math env and symbols
 \usepackage{amsmath}
+
+%% math more symbols
 \usepackage{amssymb}
+
+%% hyperlinks
+\usepackage[hidelinks]{hyperref}
+
+%% 
+\usepackage[small]{titlesec}
+
+%% include everything until subsections in the toc
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
 %% ------------------------------------------- %%
 
 \begin{document}
+    %% * suffix prints the section without the counter prefix
     \section*{Statistics - Exam preparation}
+    %% italic 
     by \textit{xnacly}
-    \paragraph{Introduction}
+
+    \tableofcontents
+
+    %% sections arent prefixed with a counter
+    \section{Introduction}
     Statistics is a fairly big field. Therefore this paper will only include
     the absolutely necessary topics for passing the university class.
 
-    \paragraph{Abstract}
+    \section{Abstract}
     This paper starts of with symbols used in the field of statistics, their
-    meaning and in what context they are commonly used. 
-    %% TODO: do this
+    meaning and in what context they are commonly used. Following Combinatorics
+    is thematized.
 
-    \paragraph{Symbols, functions and special characters}
+    \section{Symbols and special characters}
 
-    %% TODO: übersetzen
+    %% env to list items, similar to the <ul> HTML tag 
     \begin{itemize}
-       \item $n!$  Faculty 
-       \item $\binom{n}{k}$  Binomial Coefficient 
-       \item $\Omega$  Ergebnismenge 
-       \item $\omega$  Ergebnis 
-       \item $A \subseteq \Omega$  Ereignis 
-       \item $\{\omega\}$  Elementarerignis 
-       \item $\mathbb{P}$  Wahrscheinlichkeitsmaß 
-       \item $\mathbb{P}(A)$  Wahrscheinlichkeit eines Ereignisses 
-       \item $\mathbb{E}(X), \mu_x, \mu$  Erwartungswert 
-       \item $\sigma$  Standardabweichung 
-       \item $\mathrm{Var}(X), \sigma^2_x$  Varianz 
-       \item $\mathrm{Cov}(X,Y), \sigma_{XY}$  Kovarianz von X und Y 
-       \item $\Sigma$  Kovarianz-Matrix 
-       \item $\mathcal{N}(\mu, \sigma^2)$  Normalverteilung
-       \item $\varphi$  Glockenkurve 
-       \item $\Phi$  Fehlerintegral
-       \item $\mathrm{Z}$  standard-normalverteilte Zufallsvariable
-       \item $\textrm{Bin}(n, p)$  Binomialverteilung
-       \item $\textrm{Pois}(\lambda)$  Poission-Verteilung
-       \item $\textrm{Exp}(\lambda)$  Exponentialverteilung
+       %% anything between $ and $ is interpreted as a mathblock
+       \item $n!$ Faculty / Fakultät
+       \item $\binom{n}{k}$ Binomial Coefficient / Binomialkoeffizient
+       \item $\Omega$ Event set / Ergebnismenge
+       \item $\omega$ Result / Ergebnis
+       \item $A \subseteq \Omega$ Event / Ereignis
+       \item $\{\omega\}$ Elementary event / Elementarereignis
+       \item $\mathbb{P}$ Probability measure / Wahrscheinlichkeitsmaß
+       \item $\mathbb{P}(A)$ Event propability / Wahrscheinlichkeit eines Ereignisses
+       \item $\mathbb{E}(X), \mu_x, \mu$ Expected value / Erwartungswert
+       \item $\sigma$ Deviation from the mean / Standardabweichung
+       \item $\mathrm{Var}(X), \sigma^2_x$ Variance / Varianz
+       \item $\mathrm{Cov}(X,Y), \sigma_{XY}$ Kovarianz von X und Y
+       \item $\mathcal{N}(\mu, \sigma^2)$ Normal distribution / Normalverteilung
+       \item $\varphi$ Bell curve / Glockenkurve
+       \item $\Phi$ Error function / Fehlerintegral
+       \item $X$ Random variable / Zufallsvariable
+       \item $\mathrm{Z}$ Standard score / standard-normalverteilte
+           Zufallsvariable
+           \footnote{read more: \href{https://en.wikipedia.org/wiki/Standard_score}{wikipedia}}
+       \item $\textrm{Bin}(n, p)$ Binomial distribution / Binomialverteilung
+       \item $\textrm{Pois}(\lambda)$ Poisson distribution / Poission-Verteilung
+       \item $\textrm{Exp}(\lambda)$ Exponential distribution / Exponentialverteilung
     \end{itemize}
+
+    \section{Combinatorics}
+    This chapter will introduce the Binomial Coefficient, Faculty, Pascal's
+    triangle and the binomial Theorem.
+
+    \subsection{Binomial Coefficient}
+    \textit{n choose k}; used to calculate the Amount of Sets in
+    $\{1,\textrm{...},n\}$ with exactly $k$ Elements. $n$ needs to be positive
+    and $k$ and $n$ have to meet the following criteria: $n \in \mathbb{N}, 0
+    \leq k \leq n$.
+    \begin{equation}
+        \binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}
+    \end{equation}
+    Choosing $k$ different Numbers from $\{1,\textrm{...},n\}$, there are $n$
+    possibilities for the first number, $n-1$ possibilities for the second, and
+    so forth. 
+
+    \subsection{Faculty}
+    This can be described with $n!$. The faculty is defined as the
+    product of decrementing $n$ by an increasing subtrahend:
+    \begin{equation}
+        n! := n \cdot (n-1) \cdot (n-2) \textrm{...}
+    \end{equation}
+    If $n = k$, there are $n!$ possibilities to choose $k$ Elements from $n$.
+    $0! = 1$.
+
+    \subsection{Pascal's triangle}
+    The pascal's triangle can be used to visualize the binomial
+    coefficient.\footnote{read more about \textit{pascal's triangle}
+    here: \href{https://en.wikipedia.org/wiki/Pascal's_triangle}{wikipedia}}
+
+    \begin{equation}
+        \binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1}
+    \end{equation}
+
+    \subsection{Binomial Theorem}
+    Allows for expressing the exponents of $(x+y)^n, n \in \mathbb{N}$ as a
+    polynomial with the degree of $n$.
+    \begin{equation}
+        (x+y)^n = \sum^n_{k=0} \binom{n}{k} \cdot x^k \cdot y^{n-k}
+    \end{equation}
+
+    \section{Probability theory}
+    This chapter contains information on how to calculate probabilites.
+
+    \subsection{Event set}
+    The set containing results of the \textit{experiment} $E$ is notated via
+    the \textit{event set} ($\Omega$). Sub sets of $\Omega$ are
+    \textit{events} ($\omega$). \textit{Events} with one entry are \textit{elementary
+    events} $\{\omega\}$.
+    If $\Omega$ is finite: $\forall \omega \in \Omega,\mathbb{P}(\omega) \geq 0$. 
+    The sum of all propabilities of $\omega \in \Omega$ is $1$\footnote{$\sum_{\omega
+    \in \Omega} \mathbb{P}(\omega) = 1$}.
+
+    \subsection{Random variable}
+    $X: \Omega \rightarrow \mathbb{R}$ we define $\{X = x\} := \{\omega |
+    X(\omega) = x\}$ and can therefore shorten our definition of the
+    propability that $X$ is $x$ to: $P(X = x) := P(\{X = x\})$
+    \begin{eqnarray}
+        x \rightarrow \mathbb{P}(X = x) \\
+        x \rightarrow \mathbb{P}(X \leq x)
+    \end{eqnarray}
+
+    The equation 5 defines the density / probability function of $X$ and the
+    equation 6 the distribution function of $X$.
 \end{document}
