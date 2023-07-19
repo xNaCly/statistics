@@ -9,6 +9,7 @@
 
 %% diagrams
 \usepackage{pgfplots}
+%% set compatibility for version 1.7
 \pgfplotsset{compat=1.7}
 
 %% cache diagrams -> faster compile times
@@ -24,7 +25,7 @@
 %% hyperlinks
 \usepackage{hyperref}
 
-%% 
+%% make heading smaller
 \usepackage[small]{titlesec}
 
 %% include everything until subsections in the toc
@@ -35,12 +36,17 @@
 \begin{document}
     %% * suffix prints the section without the counter prefix
     \section*{Statistics - Exam preparation}
-    %% italic 
-    \href{https://xnacly.me}{xnacly} - \today - \href{https://github.com/xnacly/statistics}{source}
+    %% creates a clickable link, similar to markdown: [xnacly]{https://xnacly.me}
+    \href{https://xnacly.me}{xnacly} 
+    %% gets replaced with the current date according to your language locale,
+    %% for me its: July 19, 2023
+    - \today 
+    - \href{https://github.com/xnacly/statistics}{source}
 
+    %% creates a table of contents containing all sections,
+    %% parts, subsections, subsubsections, paragraphs and subparagraphs
     \tableofcontents
 
-    %% sections arent prefixed with a counter
     \section{Introduction}
     Statistics is a fairly big field. Therefore this paper will only include
     the absolutely necessary topics for passing the university class.
@@ -84,10 +90,14 @@
     triangle and the binomial Theorem.
 
     \subsection{Binomial Coefficient}
+    %% italic text
     \textit{n choose k}; used to calculate the Amount of Sets in
+    %% \textrm allows for non italic characters in math blocks
     $\{1,\textrm{...},n\}$ with exactly $k$ Elements. $n$ needs to be positive
     and $k$ and $n$ have to meet the following criteria: $n \in \mathbb{N}, 0
     \leq k \leq n$.
+    %% mathematics env,
+    %% adds a counter to the right of the equation and centers the equation
     \begin{equation}
         \binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}
     \end{equation}
@@ -103,15 +113,22 @@
         \frac{720}{36} = \underline{\underline{20}}
     \end{align*}
 
+    %% this creates a plot
     \begin{tikzpicture}
         \begin{axis}[
+            %% this adds a label to the x axis
             xlabel=$k$,
+            %% this adds a label to the y axis
             ylabel=Possibilities,
+            %% only add labels on the x axis if data is at that x value
             xtick=data,
+            %% diagram is a bar chart
             ybar,
+            %% indicate values of the bars near their ending
             nodes near coords,
             width=7cm,
             ]
+            %% add coordinate pairs of one type
             \addplot coordinates {
                 (1, 6)
                 (2, 15)
@@ -134,6 +151,8 @@
 
     \subsection{Pascal's triangle}
     The pascal's triangle can be used to visualize the binomial
+    %% footnotes get displayed at the bottom of the current page and 
+    %% are referenced with a superscript number which is a clickable link
     coefficient.\footnote{read more about \textit{pascal's triangle}
     here: \href{https://en.wikipedia.org/wiki/Pascal's_triangle}{wikipedia}}
 
@@ -178,6 +197,7 @@
 
     \subsubsection{Example:}
     For a dice:
+    %% same as equation, but can be used with & to align equations
     \begin{align*}
         \mathbb{P}(X = k) &= \frac{1}{6}; k = 1,2,3,4,5,6 \\
         \mathbb{E}(X) &= \sum_{k \in 1}^6 k \cdot \mathbb{P}(X = k) \\
