@@ -5,6 +5,8 @@ all:
 # removes temporary files
 clean:
 	rm -fr \
-		*.aux \
+		*.aux* \
+		*figure*.* \
+		*.toc \
 		*.out \
 		*.log
