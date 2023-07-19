@@ -9,6 +9,7 @@
 
 %% diagrams
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
 
 %% cache diagrams -> faster compile times
 \usepgfplotslibrary{external}
@@ -21,7 +22,7 @@
 \usepackage{amssymb}
 
 %% hyperlinks
-\usepackage[hidelinks]{hyperref}
+\usepackage{hyperref}
 
 %% 
 \usepackage[small]{titlesec}
@@ -35,7 +36,7 @@
     %% * suffix prints the section without the counter prefix
     \section*{Statistics - Exam preparation}
     %% italic 
-    by \textit{xnacly}
+    \href{https://xnacly.me}{xnacly} - \today - \href{https://github.com/xnacly/statistics}{source}
 
     \tableofcontents
 
@@ -63,7 +64,7 @@
        \item $\mathbb{P}$ Probability measure / Wahrscheinlichkeitsmaß
        \item $\mathbb{P}(A)$ Event propability / Wahrscheinlichkeit eines Ereignisses
        \item $\mathbb{E}(X), \mu_x, \mu$ Expected value / Erwartungswert
-       \item $\sigma$ Deviation from the mean / Standardabweichung
+       \item $\sigma$ Standard deviation / Standardabweichung
        \item $\mathrm{Var}(X), \sigma^2_x$ Variance / Varianz
        \item $\mathrm{Cov}(X,Y), \sigma_{XY}$ Kovarianz von X und Y
        \item $\mathcal{N}(\mu, \sigma^2)$ Normal distribution / Normalverteilung
@@ -94,6 +95,34 @@
     possibilities for the first number, $n-1$ possibilities for the second, and
     so forth. 
 
+    \subsubsection{Example:}
+    If we were to calculate how many possibilities there are to choose 3 out of
+    6 dishes, we can simply use the above formular:
+    \begin{align*}
+        \binom{6}{3} = \frac{6!}{3! \cdot (6-3)!} = \frac{720}{3! \cdot 3!} =
+        \frac{720}{36} = \underline{\underline{20}}
+    \end{align*}
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel=$k$,
+            ylabel=Possibilities,
+            xtick=data,
+            ybar,
+            nodes near coords,
+            width=7cm,
+            ]
+            \addplot coordinates {
+                (1, 6)
+                (2, 15)
+                (3, 20)
+                (4, 15)
+                (5, 6)
+                (6, 1)
+            };
+        \end{axis}
+    \end{tikzpicture}
+
     \subsection{Faculty}
     This can be described with $n!$. The faculty is defined as the
     product of decrementing $n$ by an increasing subtrahend:
@@ -122,14 +151,13 @@
     \section{Probability theory}
     This chapter contains information on how to calculate probabilites.
 
-    \subsection{Event set}
-    The set containing results of the \textit{experiment} $E$ is notated via
-    the \textit{event set} ($\Omega$). Sub sets of $\Omega$ are
-    \textit{events} ($\omega$). \textit{Events} with one entry are \textit{elementary
-    events} $\{\omega\}$.
-    If $\Omega$ is finite: $\forall \omega \in \Omega,\mathbb{P}(\omega) \geq 0$. 
-    The sum of all propabilities of $\omega \in \Omega$ is $1$\footnote{$\sum_{\omega
-    \in \Omega} \mathbb{P}(\omega) = 1$}.
+    \subsection{Event set} The set containing results of the
+    \textit{experiment} $E$ is notated via the \textit{event set} ($\Omega$).
+    Sub sets of $\Omega$ are \textit{events} ($\omega$). \textit{Events} with
+    one entry are \textit{elementary events} $\{\omega\}$. If $\Omega$ is
+    finite: $\forall \omega \in \Omega,\mathbb{P}(\omega) \geq 0$. The sum of
+    all propabilities of $\omega \in \Omega$ is $1$\footnote{$\sum_{\omega \in
+    \Omega} \mathbb{P}(\omega) = 1$}.
 
     \subsection{Random variable}
     $X: \Omega \rightarrow \mathbb{R}$ we define $\{X = x\} := \{\omega |
@@ -140,6 +168,87 @@
         x \rightarrow \mathbb{P}(X \leq x)
     \end{eqnarray}
 
-    The equation 5 defines the density / probability function of $X$ and the
-    equation 6 the distribution function of $X$.
+    The first equation defines the density / probability function of $X$ and the
+    second equation the distribution function of $X$.
+
+    \subsection{Expected value}
+    \begin{equation}
+        \mathbb{E}(X) = \sum_{k \in \mathbb{R}}k \cdot \mathbb{P}(X = k)
+    \end{equation}
+
+    \subsubsection{Example:}
+    For a dice:
+    \begin{align*}
+        \mathbb{P}(X = k) &= \frac{1}{6}; k = 1,2,3,4,5,6 \\
+        \mathbb{E}(X) &= \sum_{k \in 1}^6 k \cdot \mathbb{P}(X = k) \\
+                      &= \sum_{k = 1}^6 k \cdot \frac{1}{6} \\
+                      &= \frac{1}{6} (1+2+3+4+5+6) \\
+                      &= \left\lfloor\frac{21}{6}\right\rfloor =
+                      \left\lfloor\frac{7}{2}\right\rfloor = \underline{\underline{3}}
+    \end{align*}
+    As shown above the expected value is $\frac{7}{2} \approx 3,5$.
+
+    \subsection{Variance}
+    $X$: Random variable, $\mu = \mathbb{E}(X)$: expected value.
+    \begin{eqnarray}
+    \textrm{Var}(X) = \mathbb{E}\left[(X - \mu)^2\right]
+    \end{eqnarray}
+    $\left[a\right]$ denotes the flooring of $a$.
+
+    \subsection{Standard deviation}
+
+    \begin{equation}
+        \sigma_X := \textrm{SD}(X) := +\sqrt{\textrm{Var}(X)}
+    \end{equation}
+
+    \subsubsection{Standardized Variable}
+
+    $X$ is standardized, if $\mathbb{E}(X) = 0, \sigma_X^2 = 1$.
+    \section{Binomial distribution}
+
+    A random variable $X$ is binomial distributed with $n \in \mathbb{N}$ and
+    $p \in [0,1]$ if
+    \begin{equation}
+        \mathbb{P}(X = k) = \binom{n}{k}p^k(1-p)^{n-k}
+    \end{equation}
+
+    We can now denote:
+    \begin{align}
+        X &\sim \textrm{Bin}(n,p) \\
+        \mathbb{E}(X) &= np \\
+        \textrm{Var}(X) &= np(1-p)
+    \end{align}
+
+    \subsubsection{Example}
+    Calculating how probable it is to throw a penny five times and have them
+    result in four heads.
+
+    \begin{align*}
+        p &= 0,5 \\
+        \mathbb{P}(X = k) &= \binom{n}{k}p^k(1-p)^{n-k} \\
+        \mathbb{P}(X = 4) &= \binom{5}{4}0,5^4(1-0,5)^{5-4} \\
+                          &= 5 \cdot 0,0625 \cdot 0,5 \\
+                          &= \underline{\underline{0,15625}} \rightarrow 15,625\%
+    \end{align*}
+
+    \begin{tikzpicture}[
+        declare function={binom(\k,\n,\p)=\n!/(\k!*(\n-\k)!)*\p^\k*(1-\p)^(\n-\k);}
+        ]
+        \begin{axis}[
+            x tick label style={
+            /pgf/number format/1000 sep=},
+            xlabel=$k$,
+            ybar=0,
+            ylabel=$\mathbb{P}$,
+            width=8cm,
+            nodes near coords,
+            height=9cm,
+                samples at={-2,...,7},
+            ]
+            \addplot{binom(x,5,0.5)};
+            \addlegendentry{p = 0.5, n=5}
+        \end{axis}
+    \end{tikzpicture}
+
+    % how probably is it that i dont want to keep going to university: 100% :^)
 \end{document}
