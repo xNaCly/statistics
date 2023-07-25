@@ -3,7 +3,7 @@ statistic
 
 This project contains my statistic exam prep. I go into depth on topics i
 require for passing the class. I tried to comment every non trivial line in the
-latex source and provide examples for theoretic chapters.
+latex source and provide examples for dry chapters.
 
 Tips for writing latex with vim:
 --------------------------------
