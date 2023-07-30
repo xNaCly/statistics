@@ -61,7 +61,7 @@
     %% env to list items, similar to the <ul> HTML tag 
     \begin{itemize}
        %% anything between $ and $ is interpreted as a mathblock
-       \item $n!$ Faculty / Fakultät
+       \item $n!$ Factorial / Fakultät
        \item $\binom{n}{k}$ Binomial Coefficient / Binomialkoeffizient
        \item $\Omega$ Event set / Ergebnismenge
        \item $\omega$ Result / Ergebnis
@@ -168,20 +168,24 @@
     \end{equation}
 
     \section{Probability theory}
-    This chapter contains information on how to calculate probabilites.
+    This chapter contains information on how to calculate probabilities.
 
     \subsection{Event set} The set containing results of the
     \textit{experiment} $E$ is notated via the \textit{event set} ($\Omega$).
     Sub sets of $\Omega$ are \textit{events} ($\omega$). \textit{Events} with
     one entry are \textit{elementary events} $\{\omega\}$. If $\Omega$ is
     finite: $\forall \omega \in \Omega,\mathbb{P}(\omega) \geq 0$. The sum of
-    all propabilities of $\omega \in \Omega$ is $1$\footnote{$\sum_{\omega \in
-    \Omega} \mathbb{P}(\omega) = 1$}.
+    all probabilities of $\omega \in \Omega$ is $1$.
+    \footnote{
+        \begin{math}
+            \sum_{\omega \in \Omega} \mathbb{P}(\omega) = 1
+        \end{math}
+    }
 
     \subsection{Random variable}
     $X: \Omega \rightarrow \mathbb{R}$ we define $\{X = x\} := \{\omega |
     X(\omega) = x\}$ and can therefore shorten our definition of the
-    propability that $X$ is $x$ to: $P(X = x) := P(\{X = x\})$
+    probability that $X$ is $x$ to: $P(X = x) := P(\{X = x\})$
     \begin{eqnarray}
         x \rightarrow \mathbb{P}(X = x) \\
         x \rightarrow \mathbb{P}(X \leq x)
@@ -206,19 +210,20 @@
                       &= \left\lfloor\frac{21}{6}\right\rfloor =
                       \left\lfloor\frac{7}{2}\right\rfloor = \underline{\underline{3}}
     \end{align*}
-    As shown above the expected value is $\frac{7}{2} \approx 3,5$.
+    As shown above the expected value is $\left\lfloor\frac{7}{2}\right\rfloor\approx 3$.
+    \footnote{$\lfloor a \rfloor$ denotes the flooring of $a$.}
 
     \subsection{Variance}
     $X$: Random variable, $\mu = \mathbb{E}(X)$: expected value.
     \begin{eqnarray}
-    \textrm{Var}(X) = \mathbb{E}\left[(X - \mu)^2\right]
+        \textrm{Var}(X) = \mathbb{E}\left\lfloor(X -
+        \mu)^2\right\rfloor
     \end{eqnarray}
-    $\left[a\right]$ denotes the flooring of $a$.
 
     \subsection{Standard deviation}
 
     \begin{equation}
-        \sigma_X := \textrm{SD}(X) := +\sqrt{\textrm{Var}(X)}
+        \sigma_X := \textrm{SD}\footnote{short for standard deviation}(X) := +\sqrt{\textrm{Var}(X)}
     \end{equation}
 
     \subsubsection{Standardized Variable}
@@ -239,7 +244,17 @@
         \textrm{Var}(X) &= np(1-p)
     \end{align}
 
-    \subsubsection{Example}
+    Binomial distribution can be assumed if an Event either occurs or it doesn't.
+
+    \subsection{Independent random binomial distributed variables}
+
+    $X \sim \textrm{Bin}(n,p)$ and $Y \sim \textrm{Bin}(m,p)$ can be merged:
+
+    \begin{equation}
+        X + Y \sim \textrm{Bin}(n+m,p)
+    \end{equation}
+
+    \subsection{Example}
     Calculating how probable it is to throw a penny five times and have them
     result in four heads.
 
@@ -270,5 +285,114 @@
         \end{axis}
     \end{tikzpicture}
 
-    % how probably is it that i dont want to keep going to university: 100% :^)
+    \section{Geometric distribution}
+
+    A random variable $X \in \mathbb{N}$ is geometric distributed with $p \in \
+    ]0,1]$ if density is
+
+    \begin{equation}
+        \mathbb{P}(X = k) = p (1-p)^{k-1}
+    \end{equation}
+
+    or distributed with
+
+    \begin{equation}
+        \mathbb{P}(X \leq k) = 1 - (1 - p)^k
+    \end{equation}
+
+    We can denote:
+
+    \begin{align}
+        X &\sim \textrm{G}(p) \\
+        \mathbb{E}(X) &= \frac{1}{p} \\
+        \textrm{Var}(X) &= \frac{1}{p}\left(\frac{1}{p}-1\right)
+    \end{align}
+
+    \section{Poisson distribution}
+
+    A random variable $X$ is poisson distributed with $\lambda > 0$, if
+
+    \begin{equation}
+        \mathbb{P}(X = k) = \frac{\lambda^k}{k!}e^{-\lambda}
+    \end{equation}
+
+    We denote:
+
+    \begin{eqnarray}
+        X \sim \textrm{Pois}(\lambda) \\
+        \mathbb{E}(X) = \lambda \\
+        \textrm{Var}(X) = \lambda
+    \end{eqnarray}
+
+    \subsection{Independent random poisson distributed variables}
+
+    $X \sim \textrm{Pois}(\lambda)$ and $Y \sim \textrm{Pois}(\mu)$ can be merged:
+
+    \begin{equation}
+        X + Y \sim \textrm{Pois}(\lambda + \mu)
+    \end{equation}
+
+    \section{Exponential distribution}
+
+    A random variable $X \in \mathbb{R}_{\geq0}$is exponential distributed with
+    $\lambda > 0$ if density is
+
+    \begin{equation}
+        f(x) = \begin{cases}
+            \lambda e^{-\lambda x} & x \leq 0 \\
+            0 
+        \end{cases}
+    \end{equation}
+
+    or distributed with
+
+    \begin{equation}
+        F(x) = \begin{cases}
+            1 -  e^{-\lambda x} & x \leq 0 \\
+            0 
+        \end{cases}
+    \end{equation}
+
+    We denote:
+
+    \begin{eqnarray}
+        X \sim \textrm{Exp}(\lambda) \\
+        \mathbb{E}(X) = \frac{1}{\lambda} \\
+        \textrm{Var}(X) = \frac{1}{\lambda^2}
+    \end{eqnarray}
+
+    \subsection{Independent random exponential distributed variables}
+
+    $X \sim \textrm{Exp}(\lambda)$ and $Y \sim \textrm{Exp}(\mu)$ can be merged:
+
+    \begin{equation}
+        \textrm{min}(X,Y) \sim \textrm{Exp}(\lambda + \mu)
+    \end{equation}
+
+    \section{Normal distribution}
+
+    A variable $X \in \mathbb{R}$ is normal distributed for $\mu \in
+    \mathbb{R}$ and $\sigma^2 > 0$ if
+
+    \begin{equation}
+    \varphi(x) = \frac{1}{\sqrt{2\pi}} \cdot  e^{-\frac{1}{2}x^2}
+    \end{equation}
+
+    We denote:
+
+    \begin{eqnarray}
+        X \sim \mathcal{N}(\mu, \sigma^2) \\
+        \mathbb{E}(X) = \mu \\
+        \textrm{Var}(X) = \sigma^2 \\
+    \end{eqnarray}
+
+    \subsection{Independent random normal distributed variables}
+
+    $X \sim \mathcal{N}(\mu, \sigma^2)$ and $Y \sim \mathcal{N}(\upsilon, \tau^2)$ can be merged:
+
+    \begin{equation}
+        X + Y \sim \mathcal{N}(\mu + \upsilon, \sigma^2 + \tau^2)
+    \end{equation}
+
 \end{document}
+% how probably is it that i dont want to keep going to university: 100% :^)
